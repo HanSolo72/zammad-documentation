@@ -129,14 +129,17 @@ Admin privileges are not required; a normal user account will do.
 
 .. note:: Replace the following placeholders in the command below:
 
-   :``<zammad-host>``:              Zammad FQDN
+   :``<zammad-host>``:              Zammad FQDN (like zammad.your-company.com)
    :``<service-acct>``:             Service account logon name
    :``<password>``:                 Password of the service account
                                     (Option ``/pass *`` did prove to not work)
-   :``<domain>``:                   Windows domain
-   :``<master-domain-controller>``: Master domain controller IP/FQD
+   :``<domain>``:                   Windows domain in lowercase (like your-company.com)
+   :``<DOMAIN>``:                   Windows domain in uppercase (like YOUR-COMPANY.COM)
+   :``<master-domain-controller>``: Master domain controller IP/FQDN (like dc.your-company.com)
 
    Below command will prompt for the users password.
+
+   The portion with HTTP/ will appear as ``HTTP/zammad.your-company.com@YOUR-COMPANY.COM``, and although it might seem duplicated, it is indeed correct.
 
 .. code-block:: sh
 
@@ -276,7 +279,8 @@ how to reach the *domain controller* (Active Directory server).
 
 .. note:: Replace the following placeholders in the sample config below:
 
-   :``<domain>``:                   Windows domain
+   :``<domain>``:                   Windows domain in lowercase (like your-company.com)
+   :``<DOMAIN>``:                   Windows domain in uppercase (like YOUR-COMPANY.COM)
    :``<domain-controller>``:        Domain controller IP/FQDN(s)
    :``<master-domain-controller>``: Master domain controller IP/FQDN
 
@@ -322,8 +326,9 @@ to manage its shared secrets with the domain controller.
 
 .. note:: Replace the following placeholders in the commands below:
 
-   :``<zammad-host>``: Zammad FQDN
-   :``<domain>``:      Windows domain
+   :``<zammad-host>``: Zammad FQDN (like zammad.your-company.com)
+   :``<domain>``:      Windows domain in lowercase (like your-company.com)
+   :``<DOMAIN>``:      Windows domain in uppercase (like YOUR-COMPANY.COM)
    :``<secret-key>``:  Secret key (**omit the leading** ``0x``)
    :``<vno>``:         Secret key version number
 
@@ -334,7 +339,7 @@ to manage its shared secrets with the domain controller.
    $ ktutil
 
    ktutil: addent -key -p HTTP/<zammad-host>@<DOMAIN> -k <vno> -e aes256-cts
-   Key for HTTP/<zammad-host>@<domain> (hex): <secret-key>
+   Key for HTTP/<zammad-host>@<DOMAIN> (hex): <secret-key>
 
    ktutil: list  # confirm the entry was added successfully
    slot KVNO Principal
@@ -375,8 +380,9 @@ to create your Kerberos SSO endpoint at ``/auth/sso``:
 
 .. note:: Replace the following placeholders in the command below:
 
-   :``<zammad-host>``: Zammad FQDN
-   :``<domain>``:      Windows domain
+   :``<zammad-host>``: Zammad FQDN (like zammad.your-company.com)
+   :``<domain>``:      Windows domain in lowercase (like your-company.com)
+   :``<DOMAIN>``:      Windows domain in uppercase (like YOUR-COMPANY.COM)
 
    The configuration below contains two ``Krb5KeyTab`` lines!
    Keep only the one you need.
